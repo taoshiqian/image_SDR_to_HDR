@@ -1,0 +1,40 @@
+<!-- saved from url=(0014)about:internet -->
+<html>
+<body>
+<script src="resources/eml_report_loadable_data.js"></script>
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="1,1" id="srcline1"> 1</a></span><span class="line"><span class="keyword">function</span> [<span class="var type1" id="S2T1U3">A</span>,<span class="var type1" id="S3T1U4">B</span>] = test( <span class="var type1" id="S4T2U7">mark</span>,<span class="var type1" id="S5T2U8">num</span>,<span class="var type1" id="S6T3U9">array</span> )<span class="comment">%输入参数中，mark、num是标量，array是向量  </span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,2" id="srcline2"> 2</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,3" id="srcline3"> 3</a></span><span class="line"><span class="mxinfo " id="T3:U6"><span class="var type1" id="S7T3U12">a</span>=<span class="mxinfo " id="T3:U8">ones(<span class="mxinfo " id="T2:U9">1</span>,<span class="mxinfo " id="T2:U10">5</span>)</span></span>;  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,4" id="srcline4"> 4</a></span><span class="line"><span class="mxinfo " id="T3:U11"><span class="var type1" id="S9T3U19">b</span>=<span class="mxinfo " id="T3:U13">zeros(<span class="mxinfo " id="T2:U14">1</span>,<span class="mxinfo " id="T2:U15">5</span>)</span></span>;  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,5" id="srcline5"> 5</a></span><span class="line">    <span class="keyword">if</span> <span class="mxinfo " id="T4:U16"><span class="var type1" id="S4T2U27">mark</span>==<span class="mxinfo " id="T2:U18">0</span></span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,6" id="srcline6"> 6</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,7" id="srcline7"> 7</a></span><span class="line">        <span class="keyword">for</span> <span class="var type1" id="S11T2U31">i</span>=<span class="mxinfo " id="T5:U20"><span class="mxinfo " id="T2:U21">1</span>:<span class="var type1" id="S5T2U34">num</span></span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,8" id="srcline8"> 8</a></span><span class="line">             <span class="keyword">if</span> <span class="mxinfo " id="T4:U23"><span class="var type1" id="S11T2U38">i</span>==<span class="mxinfo " id="T2:U25">1</span></span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,9" id="srcline9"> 9</a></span><span class="line">                 <span class="mxinfo " id="T1:U26"><span class="var type1" id="S2T1U42">A</span>=<span class="var type1" id="S7T3U43">a</span></span>;  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,10" id="srcline10">10</a></span><span class="line">                 <span class="mxinfo " id="T1:U29"><span class="var type1" id="S3T1U46">B</span>=<span class="var type1" id="S9T3U47">b</span></span>;  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,11" id="srcline11">11</a></span><span class="line">             <span class="keyword">else</span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,12" id="srcline12">12</a></span><span class="line">                 <span class="mxinfo " id="T1:U32"><span class="var type1" id="S2T1U51">A</span>=<span class="mxinfo " id="T1:U34">[<span class="var type1" id="S2T1U54">A</span>,<span class="var type1" id="S7T3U55">a</span>]</span></span>;  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,13" id="srcline13">13</a></span><span class="line">                 <span class="mxinfo " id="T1:U37"><span class="var type1" id="S3T1U58">B</span>=<span class="mxinfo " id="T1:U39">[<span class="var type1" id="S3T1U61">B</span>,<span class="var type1" id="S9T3U62">b</span>]</span></span>;     </span></span>
+<span class="srcline"><span class="lineno"><a href="1,14" id="srcline14">14</a></span><span class="line">             <span class="keyword">end</span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,15" id="srcline15">15</a></span><span class="line">        <span class="keyword">end</span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,16" id="srcline16">16</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,17" id="srcline17">17</a></span><span class="line">    <span class="keyword">else</span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,18" id="srcline18">18</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,19" id="srcline19">19</a></span><span class="line">        <span class="keyword">for</span> <span class="var type1" id="S11T2U66">i</span>=<span class="mxinfo " id="T5:U43"><span class="mxinfo " id="T2:U44">1</span>:<span class="var type1" id="S5T2U69">num</span></span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,20" id="srcline20">20</a></span><span class="line">             <span class="keyword">if</span> <span class="mxinfo " id="T4:U46"><span class="var type1" id="S11T2U73">i</span>==<span class="mxinfo " id="T2:U48">1</span></span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,21" id="srcline21">21</a></span><span class="line">                 <span class="mxinfo " id="T1:U49"><span class="var type1" id="S2T1U77">A</span>=<span class="var type1" id="S7T3U78">a</span></span>;  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,22" id="srcline22">22</a></span><span class="line">                 <span class="mxinfo " id="T1:U52"><span class="var type1" id="S3T1U81">B</span>=<span class="var type1" id="S9T3U82">b</span></span>;  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,23" id="srcline23">23</a></span><span class="line">             <span class="keyword">else</span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,24" id="srcline24">24</a></span><span class="line">                 <span class="mxinfo " id="T1:U55"><span class="var type1" id="S2T1U86">A</span>=<span class="mxinfo " id="T1:U57">[<span class="mxinfo " id="T1:U58"><span class="var type1" id="S2T1U89"><span class="message error" id="M1F1C">A</span></span></span>,<span class="var type1" id="S6T3U90">array</span>]</span></span>;  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,25" id="srcline25">25</a></span><span class="line">                 <span class="mxinfo " id="T1:U60"><span class="var type1" id="S3T1U93">B</span>=<span class="mxinfo " id="T1:U62">[<span class="var type1" id="S3T1U96">B</span>,<span class="var type1" id="S6T3U97">array</span>]</span></span>;     </span></span>
+<span class="srcline"><span class="lineno"><a href="1,26" id="srcline26">26</a></span><span class="line">             <span class="keyword">end</span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,27" id="srcline27">27</a></span><span class="line">        <span class="keyword">end</span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,28" id="srcline28">28</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,29" id="srcline29">29</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,30" id="srcline30">30</a></span><span class="line">    <span class="keyword">end</span>  </span></span>
+<span class="srcline"><span class="lineno"><a href="1,31" id="srcline31">31</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,32" id="srcline32">32</a></span><span class="line"><span class="keyword">end</span>  </span></span>
+</pre>
+</body>
+</html>

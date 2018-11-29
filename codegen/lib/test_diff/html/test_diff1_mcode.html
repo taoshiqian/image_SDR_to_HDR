@@ -1,0 +1,13 @@
+<!-- saved from url=(0014)about:internet -->
+<html>
+<body>
+<script src="resources/eml_report_loadable_data.js"></script>
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="1,1" id="srcline1">1</a></span><span class="line"><span class="keyword">function</span> <span class="var type1" id="S2T1U3">dt0_v</span> = test_diff(<span class="var type1" id="S3T2U6">I</span>) <span class="comment">% camera a, b</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,2" id="srcline2">2</a></span><span class="line"><span class="mxinfo " id="T3:U3"><span class="var type1" id="S4T3U9">t_b</span> = <span class="mxinfo " id="T3:U5">max( <span class="var type1" id="S3T2U12">I</span>, [], 3 )</span></span>; <span class="comment">% also work for single-channel image</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,3" id="srcline3">3</a></span><span class="line"><span class="mxinfo " id="T4:U7"><span class="var type1" id="S3T4U18">I</span> = <span class="mxinfo " id="T4:U9">imresize( <span class="var type1" id="S4T3U21">t_b</span>, 0.5 )</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,4" id="srcline4">4</a></span><span class="line"><span class="mxinfo " id="T1:U11"><span class="var type1" id="S7T1U25">fin</span> = <span class="mxinfo " id="T1:U13">im2double( <span class="var type1" id="S3T4U28">I</span> )</span></span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,5" id="srcline5">5</a></span><span class="line"><span class="mxinfo " id="T1:U15"><span class="var type1" id="S2T1U31">dt0_v</span> = <span class="mxinfo " id="T1:U17">[<span class="mxinfo " id="T5:U18">diff(<span class="var type1" id="S7T1U36">fin</span>,1,1)</span>;<span class="mxinfo " id="T6:U20"><span class="mxinfo " id="T6:U21"><span class="var type1" id="S7T1U42">fin</span>(<span class="mxinfo " id="T7:U23">1</span>,<span class="mxinfo " id="T8:U24">:</span>)</span>-<span class="mxinfo " id="T6:U25"><span class="var type1" id="S7T1U46">fin</span>(<span class="mxinfo " id="T7:U27">end</span>,<span class="mxinfo " id="T8:U28">:</span>)</span></span>]</span></span>;</span></span>
+</pre>
+</body>
+</html>
