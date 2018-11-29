@@ -1,0 +1,184 @@
+<!-- saved from url=(0014)about:internet -->
+<html>
+<body>
+<script src="resources/eml_report_loadable_data.js"></script>
+<div class="dead">
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="1,1" id="srcline1">  1</a></span><span class="line">function fused = Ying_2017_CAIP(I, mu, k, a, b) <span class="comment">% camera a, b</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,2" id="srcline2">  2</a></span><span class="line"><span class="comment">%%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,3" id="srcline3">  3</a></span><span class="line"><span class="comment">% @inproceedings{ying2017new,</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,4" id="srcline4">  4</a></span><span class="line"><span class="comment">%   title={A New Image Contrast Enhancement Algorithm Using Exposure Fusion Framework},</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,5" id="srcline5">  5</a></span><span class="line"><span class="comment">%   author={Ying, Zhenqiang and Li, Ge and Ren, Yurui and Wang, Ronggang and Wang, Wenmin},</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,6" id="srcline6">  6</a></span><span class="line"><span class="comment">%   booktitle={International Conference on Computer Analysis of Images and Patterns},</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,7" id="srcline7">  7</a></span><span class="line"><span class="comment">%   pages={36--46},</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,8" id="srcline8">  8</a></span><span class="line"><span class="comment">%   year={2017},</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,9" id="srcline9">  9</a></span><span class="line"><span class="comment">%   organization={Springer}</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,10" id="srcline10"> 10</a></span><span class="line"><span class="comment">% }</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,11" id="srcline11"> 11</a></span><span class="line"><span class="comment">%</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,12" id="srcline12"> 12</a></span><span class="line"><span class="comment">% Please feel free to contact me (yingzhenqiang-at-gmail-dot-com) if you</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,13" id="srcline13"> 13</a></span><span class="line"><span class="comment">% have any questions or concerns.</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,14" id="srcline14"> 14</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,15" id="srcline15"> 15</a></span><span class="line">if  ~exist( 'mu', 'var' )</span></span>
+<span class="srcline"><span class="lineno"><a href="1,16" id="srcline16"> 16</a></span><span class="line">    mu = 0.5;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,17" id="srcline17"> 17</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,18" id="srcline18"> 18</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,19" id="srcline19"> 19</a></span><span class="line">if ~exist( 'a', 'var' )</span></span>
+<span class="srcline"><span class="lineno"><a href="1,20" id="srcline20"> 20</a></span><span class="line">    a = -0.3293;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,21" id="srcline21"> 21</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,22" id="srcline22"> 22</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,23" id="srcline23"> 23</a></span><span class="line">if ~exist( 'b', 'var' )</span></span>
+<span class="srcline"><span class="lineno"><a href="1,24" id="srcline24"> 24</a></span><span class="line">    b = 1.1258;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,25" id="srcline25"> 25</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,26" id="srcline26"> 26</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,27" id="srcline27"> 27</a></span><span class="line">if ~isfloat(I)</span></span>
+<span class="srcline"><span class="lineno"><a href="1,28" id="srcline28"> 28</a></span><span class="line">    I = im2double( I );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,29" id="srcline29"> 29</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,30" id="srcline30"> 30</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,31" id="srcline31"> 31</a></span><span class="line">lambda = 0.5;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,32" id="srcline32"> 32</a></span><span class="line">sigma = 5;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,33" id="srcline33"> 33</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,34" id="srcline34"> 34</a></span><span class="line"><span class="comment">%% t: scene illumination map</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,35" id="srcline35"> 35</a></span><span class="line">t_b = max( I, [], 3 ); <span class="comment">% also work for single-channel image</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,36" id="srcline36"> 36</a></span><span class="line">t_our =  imresize( tsmooth( imresize( t_b, 0.5 ), lambda, sigma ), size( t_b ) );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,37" id="srcline37"> 37</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,38" id="srcline38"> 38</a></span><span class="line"><span class="comment">%% k: exposure ratio</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,39" id="srcline39"> 39</a></span><span class="line">if  ~exist( 'k', 'var' ) || isempty(k)</span></span>
+<span class="srcline"><span class="lineno"><a href="1,40" id="srcline40"> 40</a></span><span class="line">    isBad = t_our &lt; 0.5;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,41" id="srcline41"> 41</a></span><span class="line">    J = maxEntropyEnhance(I, isBad);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,42" id="srcline42"> 42</a></span><span class="line">else</span></span>
+<span class="srcline"><span class="lineno"><a href="1,43" id="srcline43"> 43</a></span><span class="line">    J = applyK(I, k, a, b); <span class="comment">%k</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,44" id="srcline44"> 44</a></span><span class="line">    J = min(J, 1); <span class="comment">% fix overflow</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,45" id="srcline45"> 45</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,46" id="srcline46"> 46</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,47" id="srcline47"> 47</a></span><span class="line"><span class="comment">%% W: Weight Matrix </span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,48" id="srcline48"> 48</a></span><span class="line">t = repmat(t_our, [1 1 size(I,3)]);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,49" id="srcline49"> 49</a></span><span class="line">W = t.^mu;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,50" id="srcline50"> 50</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,51" id="srcline51"> 51</a></span><span class="line">I2 = I.*W;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,52" id="srcline52"> 52</a></span><span class="line">J2 = J.*(1-W);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,53" id="srcline53"> 53</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,54" id="srcline54"> 54</a></span><span class="line">fused = I2 + J2;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,55" id="srcline55"> 55</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,56" id="srcline56"> 56</a></span><span class="line">    function J = maxEntropyEnhance(I, isBad)</span></span>
+<span class="srcline"><span class="lineno"><a href="1,57" id="srcline57"> 57</a></span><span class="line">        Y = rgb2gm(real(max(imresize(I, [50 50]), 0))); <span class="comment">% max - avoid complex number </span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,58" id="srcline58"> 58</a></span><span class="line">        </span></span>
+<span class="srcline"><span class="lineno"><a href="1,59" id="srcline59"> 59</a></span><span class="line">        if exist('isBad', 'var')</span></span>
+<span class="srcline"><span class="lineno"><a href="1,60" id="srcline60"> 60</a></span><span class="line">            isBad = (imresize(isBad, [50 50]));</span></span>
+<span class="srcline"><span class="lineno"><a href="1,61" id="srcline61"> 61</a></span><span class="line">            Y = Y(isBad);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,62" id="srcline62"> 62</a></span><span class="line">        end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,63" id="srcline63"> 63</a></span><span class="line">        </span></span>
+<span class="srcline"><span class="lineno"><a href="1,64" id="srcline64"> 64</a></span><span class="line">        if isempty(Y)</span></span>
+<span class="srcline"><span class="lineno"><a href="1,65" id="srcline65"> 65</a></span><span class="line">           J = I; <span class="comment">% no enhancement k = 1</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,66" id="srcline66"> 66</a></span><span class="line">           return;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,67" id="srcline67"> 67</a></span><span class="line">        end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,68" id="srcline68"> 68</a></span><span class="line">        </span></span>
+<span class="srcline"><span class="lineno"><a href="1,69" id="srcline69"> 69</a></span><span class="line">        opt_k = fminbnd(@(k) ( -entropy(applyK(Y, k)) ),1, 7);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,70" id="srcline70"> 70</a></span><span class="line">        J = applyK(I, opt_k, a, b) - 0.01;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,71" id="srcline71"> 71</a></span><span class="line">        </span></span>
+<span class="srcline"><span class="lineno"><a href="1,72" id="srcline72"> 72</a></span><span class="line">    end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,73" id="srcline73"> 73</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,74" id="srcline74"> 74</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,75" id="srcline75"> 75</a></span><span class="line">function I = rgb2gm(I)</span></span>
+<span class="srcline"><span class="lineno"><a href="1,76" id="srcline76"> 76</a></span><span class="line">if size(I,3) == 3</span></span>
+<span class="srcline"><span class="lineno"><a href="1,77" id="srcline77"> 77</a></span><span class="line">    I = im2double(max(0,I)); <span class="comment">% negative double --&gt; complex double</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,78" id="srcline78"> 78</a></span><span class="line">    I = ( I(:,:,1).*I(:,:,2).*I(:,:,3) ).^(1/3);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,79" id="srcline79"> 79</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,80" id="srcline80"> 80</a></span><span class="line">end</span></span>
+</pre>
+</div>
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="1,81" id="srcline81"> 81</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,82" id="srcline82"> 82</a></span><span class="line"><span class="keyword">function</span> <span class="var type0" id="S52T0U308">J</span> = applyK(<span class="var type1" id="S53T1U311">I</span>, <span class="var type1" id="S54T2U312">k</span>, <span class="var type1" id="S55T2U313">a</span>, <span class="var type1" id="S56T2U314">b</span>)</span></span>
+<span class="srcline"><span class="lineno"><a href="1,83" id="srcline83"> 83</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,84" id="srcline84"> 84</a></span><span class="line"><span class="keyword">if</span> ~<span class="message fatal" id="M25F663C">exist( <span class="string">'a'</span>, <span class="string">'var'</span> )</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,85" id="srcline85"> 85</a></span><span class="line">    <span class="var type0" id="S55T0U324">a</span> = -0.3293;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,86" id="srcline86"> 86</a></span><span class="line"><span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,87" id="srcline87"> 87</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,88" id="srcline88"> 88</a></span><span class="line"><span class="keyword">if</span> ~exist( <span class="string">'b'</span>, <span class="string">'var'</span> )</span></span>
+<span class="srcline"><span class="lineno"><a href="1,89" id="srcline89"> 89</a></span><span class="line">    <span class="var type0" id="S56T0U336">b</span> = 1.1258;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,90" id="srcline90"> 90</a></span><span class="line"><span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,91" id="srcline91"> 91</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,92" id="srcline92"> 92</a></span><span class="line"><span class="var type0" id="S58T0U340">f</span> = @(x)exp((1-x.^<span class="var type0" id="S55T0U351">a</span>)*<span class="var type0" id="S56T0U352">b</span>);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,93" id="srcline93"> 93</a></span><span class="line"><span class="var type0" id="S60T0U355">beta</span> = <span class="var type0" id="S58T0U357">f</span>(<span class="var type0" id="S54T0U358">k</span>);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,94" id="srcline94"> 94</a></span><span class="line"><span class="var type0" id="S61T0U361">gamma</span> = <span class="var type0" id="S54T0U363">k</span>.^<span class="var type0" id="S55T0U364">a</span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,95" id="srcline95"> 95</a></span><span class="line"><span class="var type0" id="S52T0U367">J</span> = <span class="var type0" id="S53T0U370">I</span>.^<span class="var type0" id="S61T0U371">gamma</span>.*<span class="var type0" id="S60T0U372">beta</span>;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,96" id="srcline96"> 96</a></span><span class="line"><span class="keyword">end</span></span></span>
+<span class="srcline"><span class="lineno"><a href="1,97" id="srcline97"> 97</a></span><span class="line"></span></span>
+</pre>
+<div class="dead">
+<pre class="code">
+<span class="srcline"><span class="lineno"><a href="1,98" id="srcline98"> 98</a></span><span class="line">function S = tsmooth( I, lambda, sigma, sharpness)</span></span>
+<span class="srcline"><span class="lineno"><a href="1,99" id="srcline99"> 99</a></span><span class="line">if ( ~exist( 'lambda', 'var' ) )</span></span>
+<span class="srcline"><span class="lineno"><a href="1,100" id="srcline100">100</a></span><span class="line">    lambda = 0.01;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,101" id="srcline101">101</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,102" id="srcline102">102</a></span><span class="line">if ( ~exist( 'sigma', 'var' ) )</span></span>
+<span class="srcline"><span class="lineno"><a href="1,103" id="srcline103">103</a></span><span class="line">    sigma = 3.0;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,104" id="srcline104">104</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,105" id="srcline105">105</a></span><span class="line">if ( ~exist( 'sharpness', 'var' ) )</span></span>
+<span class="srcline"><span class="lineno"><a href="1,106" id="srcline106">106</a></span><span class="line">    sharpness = 0.001;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,107" id="srcline107">107</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,108" id="srcline108">108</a></span><span class="line">I = im2double( I );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,109" id="srcline109">109</a></span><span class="line">x = I;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,110" id="srcline110">110</a></span><span class="line">[ wx, wy ] = computeTextureWeights( x, sigma, sharpness);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,111" id="srcline111">111</a></span><span class="line">S = solveLinearEquation( I, wx, wy, lambda );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,112" id="srcline112">112</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,113" id="srcline113">113</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,114" id="srcline114">114</a></span><span class="line">function [ W_h, W_v ] = computeTextureWeights( fin, sigma, sharpness)</span></span>
+<span class="srcline"><span class="lineno"><a href="1,115" id="srcline115">115</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,116" id="srcline116">116</a></span><span class="line">dt0_v = [diff(fin,1,1);fin(1,:)-fin(end,:)];</span></span>
+<span class="srcline"><span class="lineno"><a href="1,117" id="srcline117">117</a></span><span class="line">dt0_h = [diff(fin,1,2)';fin(:,1)'-fin(:,end)']';</span></span>
+<span class="srcline"><span class="lineno"><a href="1,118" id="srcline118">118</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,119" id="srcline119">119</a></span><span class="line">gauker_h = filter2(ones(1,sigma),dt0_h);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,120" id="srcline120">120</a></span><span class="line">gauker_v = filter2(ones(sigma,1),dt0_v);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,121" id="srcline121">121</a></span><span class="line">W_h = 1./(abs(gauker_h).*abs(dt0_h)+sharpness);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,122" id="srcline122">122</a></span><span class="line">W_v = 1./(abs(gauker_v).*abs(dt0_v)+sharpness);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,123" id="srcline123">123</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,124" id="srcline124">124</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,125" id="srcline125">125</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,126" id="srcline126">126</a></span><span class="line">function OUT = solveLinearEquation( IN, wx, wy, lambda )</span></span>
+<span class="srcline"><span class="lineno"><a href="1,127" id="srcline127">127</a></span><span class="line">[ r, c, ch ] = size( IN );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,128" id="srcline128">128</a></span><span class="line">k = r * c;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,129" id="srcline129">129</a></span><span class="line">dx =  -lambda * wx( : );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,130" id="srcline130">130</a></span><span class="line">dy =  -lambda * wy( : );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,131" id="srcline131">131</a></span><span class="line">tempx = [wx(:,end),wx(:,1:end-1)];</span></span>
+<span class="srcline"><span class="lineno"><a href="1,132" id="srcline132">132</a></span><span class="line">tempy = [wy(end,:);wy(1:end-1,:)];</span></span>
+<span class="srcline"><span class="lineno"><a href="1,133" id="srcline133">133</a></span><span class="line">dxa = -lambda *tempx(:);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,134" id="srcline134">134</a></span><span class="line">dya = -lambda *tempy(:);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,135" id="srcline135">135</a></span><span class="line">tempx = [wx(:,end),zeros(r,c-1)];</span></span>
+<span class="srcline"><span class="lineno"><a href="1,136" id="srcline136">136</a></span><span class="line">tempy = [wy(end,:);zeros(r-1,c)];</span></span>
+<span class="srcline"><span class="lineno"><a href="1,137" id="srcline137">137</a></span><span class="line">dxd1 = -lambda * tempx(:);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,138" id="srcline138">138</a></span><span class="line">dyd1 = -lambda * tempy(:);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,139" id="srcline139">139</a></span><span class="line">wx(:,end) = 0;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,140" id="srcline140">140</a></span><span class="line">wy(end,:) = 0;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,141" id="srcline141">141</a></span><span class="line">dxd2 = -lambda * wx(:);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,142" id="srcline142">142</a></span><span class="line">dyd2 = -lambda * wy(:);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,143" id="srcline143">143</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,144" id="srcline144">144</a></span><span class="line">Ax = spdiags( [dxd1,dxd2], [-k+r,-r], k, k );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,145" id="srcline145">145</a></span><span class="line">Ay = spdiags( [dyd1,dyd2], [-r+1,-1], k, k );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,146" id="srcline146">146</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,147" id="srcline147">147</a></span><span class="line">D = 1 - ( dx + dy + dxa + dya);</span></span>
+<span class="srcline"><span class="lineno"><a href="1,148" id="srcline148">148</a></span><span class="line">A = (Ax+Ay) + (Ax+Ay)' + spdiags( D, 0, k, k );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,149" id="srcline149">149</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,150" id="srcline150">150</a></span><span class="line">if exist( 'ichol', 'builtin' )</span></span>
+<span class="srcline"><span class="lineno"><a href="1,151" id="srcline151">151</a></span><span class="line">    L = ichol( A, struct( 'michol', 'on' ) );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,152" id="srcline152">152</a></span><span class="line">    OUT = IN;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,153" id="srcline153">153</a></span><span class="line">    for ii = 1:ch</span></span>
+<span class="srcline"><span class="lineno"><a href="1,154" id="srcline154">154</a></span><span class="line">        tin = IN( :, :, ii );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,155" id="srcline155">155</a></span><span class="line">        [ tout, ~ ] = pcg( A, tin( : ), 0.1, 50, L, L' );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,156" id="srcline156">156</a></span><span class="line">        OUT( :, :, ii ) = reshape( tout, r, c );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,157" id="srcline157">157</a></span><span class="line">    end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,158" id="srcline158">158</a></span><span class="line">else</span></span>
+<span class="srcline"><span class="lineno"><a href="1,159" id="srcline159">159</a></span><span class="line">    OUT = IN;</span></span>
+<span class="srcline"><span class="lineno"><a href="1,160" id="srcline160">160</a></span><span class="line">    for ii = 1:ch</span></span>
+<span class="srcline"><span class="lineno"><a href="1,161" id="srcline161">161</a></span><span class="line">        tin = IN( :, :, ii );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,162" id="srcline162">162</a></span><span class="line">        tout = A\tin( : );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,163" id="srcline163">163</a></span><span class="line">        OUT( :, :, ii ) = reshape( tout, r, c );</span></span>
+<span class="srcline"><span class="lineno"><a href="1,164" id="srcline164">164</a></span><span class="line">    end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,165" id="srcline165">165</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,166" id="srcline166">166</a></span><span class="line">end</span></span>
+<span class="srcline"><span class="lineno"><a href="1,167" id="srcline167">167</a></span><span class="line"></span></span>
+<span class="srcline"><span class="lineno"><a href="1,168" id="srcline168">168</a></span><span class="line"> </span></span>
+</pre>
+</div>
+</body>
+</html>
