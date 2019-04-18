@@ -34,8 +34,8 @@ A New Low-Light Image Enhancement Algorithm using Camera Response Model
 6. demoTSQtest：用于评价效果好坏
 7. demoTSQlight的效果：
 
-![image](D:/MATLAB/HDR/image_SDR_to_HDR-master/person/input.jpg)
-![image](D:/MATLAB/HDR/image_SDR_to_HDR-master/person/input_out.jpg)
+![image](./person/input.jpg)
+![image](./person/input_out.jpg)
 我的修改：\
 1.代码修改部分细节，并新增中文注解\
 2.代码新增：“低光区域增强”+“过曝光区域降光”,并引入其他颜色空间\
@@ -51,13 +51,13 @@ allColor文件夹中，P（或Q属于输入图片的名字）。其他图的名�
 \
 效果展示\
 原图\
-![image](D:/MATLAB/HDR/image_SDR_to_HDR-master/allColor/Q.jpg)\
+![image](./allColor/Q.jpg)\
 
 RGB空间下，景色部分（树、海岸……）得到“暗光区域增亮”的加强，人脸、锁骨、衣服白色字体等部分得到了“过曝光区域降光”的美化\
 
-![image](D:/MATLAB/HDR/image_SDR_to_HDR-master/allColor/Q_RGB_Light_Dark.jpg)\
+![image](./allColor/Q_RGB_Light_Dark.jpg)\
 
 HSV空间下，景色部分（树、海岸……）得到“暗光区域增亮”的加强，人脸、锁骨、衣服白色字体等部分得到了“过曝光区域降光”的美化\
-![image](D:/MATLAB/HDR/image_SDR_to_HDR-master/allColor/Q_HSV_Light_Dark.jpg)\
+![image](./allColor/Q_HSV_Light_Dark.jpg)\
 更多颜色空间下的效果请看allColor文件夹
 
