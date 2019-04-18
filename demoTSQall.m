@@ -33,8 +33,6 @@ for ii = 1:numel(cs)
     J = im2double(I);
     name = cs{ii};
     ch = idx{ii};
-    name = 'HSV';
-    ch = 3;
     fprintf('\n   %d name = %s\n',ii, name);
     
     hsvJ = colorspace(['RGB->',name],J);
